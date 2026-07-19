@@ -1,0 +1,36 @@
+.chatbot-markdown {
+  line-height: 1.7;
+}
+
+.chatbot-markdown p {
+  margin: 0 0 0.75rem;
+}
+
+.chatbot-markdown ul,
+.chatbot-markdown ol {
+  margin: 0 0 0.75rem 1.25rem;
+}
+
+.chatbot-markdown li {
+  margin-bottom: 0.35rem;
+}
+
+.chatbot-markdown strong {
+  color: #3730a3;
+}
+
+.chatbot-markdown h1,
+.chatbot-markdown h2,
+.chatbot-markdown h3 {
+  color: #312e81;
+  font-weight: 700;
+  margin: 1rem 0 0.5rem;
+}
+
+.chatbot-markdown code {
+  background: #eef2ff;
+  color: #4338ca;
+  padding: 0.15rem 0.4rem;
+  border-radius: 0.35rem;
+  font-size: 0.85em;
+}

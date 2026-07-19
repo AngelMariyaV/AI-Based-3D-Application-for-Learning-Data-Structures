@@ -1,0 +1,252 @@
+/* ------------------------------------------------------------------ */
+/* Animated "GIF-style" preview loops for each core topic.             */
+/* Pure CSS/SVG animations — no external media, so they always load    */
+/* instantly and loop forever like a real animated GIF would.          */
+/* ------------------------------------------------------------------ */
+
+.gif-frame {
+  position: relative;
+  border-radius: 1rem;
+  background: #0f172a;
+  overflow: hidden;
+  height: 190px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+.gif-frame:focus-visible {
+  outline: 3px solid #818cf8;
+  outline-offset: -3px;
+}
+
+.gif-play-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(15, 23, 42, 0);
+  opacity: 0;
+  transition: opacity 0.2s ease, background 0.2s ease;
+}
+.gif-play-overlay svg {
+  font-size: 3rem;
+  color: #fff;
+  filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.5));
+  transform: scale(0.85);
+  transition: transform 0.2s ease;
+}
+.gif-frame:hover .gif-play-overlay,
+.gif-frame:focus-visible .gif-play-overlay {
+  opacity: 1;
+  background: rgba(15, 23, 42, 0.45);
+}
+.gif-frame:hover .gif-play-overlay svg,
+.gif-frame:focus-visible .gif-play-overlay svg {
+  transform: scale(1);
+}
+
+.gif-badge {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  z-index: 5;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: #fff;
+  background: rgba(239, 68, 68, 0.9);
+  padding: 2px 8px;
+  border-radius: 999px;
+  text-transform: uppercase;
+}
+
+.gif-loop-badge {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  z-index: 5;
+  font-size: 0.65rem;
+  color: #cbd5e1;
+  background: rgba(15, 23, 42, 0.6);
+  padding: 2px 8px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+/* ---------------- Array ---------------- */
+.demo-array {
+  display: flex;
+  gap: 8px;
+}
+.demo-array .cell {
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  background: #312e81;
+  color: #e0e7ff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.95rem;
+  border: 2px solid #4f46e5;
+  animation: array-scan 4s ease-in-out infinite;
+}
+.demo-array .cell:nth-child(1) { animation-delay: 0s; }
+.demo-array .cell:nth-child(2) { animation-delay: 0.4s; }
+.demo-array .cell:nth-child(3) { animation-delay: 0.8s; }
+.demo-array .cell:nth-child(4) { animation-delay: 1.2s; }
+.demo-array .cell:nth-child(5) { animation-delay: 1.6s; }
+@keyframes array-scan {
+  0%, 60%, 100% { background: #312e81; transform: translateY(0); border-color: #4f46e5; }
+  15%, 30% { background: #6366f1; transform: translateY(-8px); border-color: #a5b4fc; }
+}
+
+/* ---------------- Stack ---------------- */
+.demo-stack {
+  display: flex;
+  flex-direction: column-reverse;
+  gap: 6px;
+  align-items: center;
+}
+.demo-stack .cell {
+  width: 90px;
+  height: 28px;
+  border-radius: 6px;
+  background: #4f46e5;
+  border: 2px solid #818cf8;
+  color: #eef2ff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.8rem;
+  animation: stack-cycle 3.6s ease-in-out infinite;
+}
+.demo-stack .cell:nth-child(1) { animation-delay: 0s; }
+.demo-stack .cell:nth-child(2) { animation-delay: 0.15s; }
+.demo-stack .cell:nth-child(3) { animation-delay: 0.3s; }
+@keyframes stack-cycle {
+  0%, 40% { opacity: 1; transform: translateY(0) scale(1); }
+  55% { opacity: 0; transform: translateY(-30px) scale(0.7); }
+  70% { opacity: 0; transform: translateY(30px) scale(0.7); }
+  85%, 100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* ---------------- Queue ---------------- */
+.demo-queue-track {
+  position: relative;
+  width: 220px;
+  height: 46px;
+  border-radius: 10px;
+  border: 2px dashed #475569;
+}
+.demo-queue-track .cell {
+  position: absolute;
+  top: 3px;
+  width: 40px;
+  height: 34px;
+  border-radius: 6px;
+  background: #059669;
+  border: 2px solid #34d399;
+  color: #ecfdf5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.8rem;
+  animation: queue-flow 3.2s linear infinite;
+}
+.demo-queue-track .cell:nth-child(1) { animation-delay: 0s; }
+.demo-queue-track .cell:nth-child(2) { animation-delay: 0.8s; }
+.demo-queue-track .cell:nth-child(3) { animation-delay: 1.6s; }
+.demo-queue-track .cell:nth-child(4) { animation-delay: 2.4s; }
+@keyframes queue-flow {
+  0% { left: 176px; opacity: 0; }
+  10% { opacity: 1; }
+  85% { opacity: 1; }
+  100% { left: -44px; opacity: 0; }
+}
+.demo-queue-labels {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 6px;
+  font-size: 0.6rem;
+  color: #94a3b8;
+  pointer-events: none;
+}
+
+/* ---------------- Linked List ---------------- */
+.demo-linkedlist {
+  display: flex;
+  align-items: center;
+}
+.demo-linkedlist .node {
+  width: 38px;
+  height: 38px;
+  border-radius: 999px;
+  background: #1e293b;
+  border: 2px solid #64748b;
+  color: #e2e8f0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.85rem;
+  animation: node-pulse 3.2s ease-in-out infinite;
+}
+.demo-linkedlist .node:nth-child(1) { animation-delay: 0s; }
+.demo-linkedlist .node:nth-child(3) { animation-delay: 0.55s; }
+.demo-linkedlist .node:nth-child(5) { animation-delay: 1.1s; }
+.demo-linkedlist .node:nth-child(7) { animation-delay: 1.65s; }
+@keyframes node-pulse {
+  0%, 10%, 100% { background: #1e293b; border-color: #64748b; transform: scale(1); }
+  3% { background: #db2777; border-color: #f472b6; transform: scale(1.18); }
+}
+.demo-linkedlist .arrow {
+  width: 22px;
+  height: 2px;
+  background: #64748b;
+  position: relative;
+  margin: 0 2px;
+}
+.demo-linkedlist .arrow::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: -3px;
+  border-left: 6px solid #64748b;
+  border-top: 4px solid transparent;
+  border-bottom: 4px solid transparent;
+}
+
+/* ---------------- Tree (SVG-driven, classes toggle via inline styles) ---------------- */
+.demo-tree circle {
+  animation: tree-glow 3.6s ease-in-out infinite;
+}
+@keyframes tree-glow {
+  0%, 8%, 100% { fill: #1e293b; stroke: #64748b; }
+  4% { fill: #0891b2; stroke: #67e8f9; }
+}
+
+/* ---------------- Graph (SVG-driven) ---------------- */
+.demo-graph circle {
+  animation: graph-pulse 4s ease-in-out infinite;
+}
+@keyframes graph-pulse {
+  0%, 12%, 100% { fill: #1e293b; stroke: #64748b; }
+  6% { fill: #d97706; stroke: #fbbf24; }
+}
+.demo-graph line {
+  stroke-dasharray: 6 4;
+  animation: graph-flow 1.4s linear infinite;
+}
+@keyframes graph-flow {
+  to { stroke-dashoffset: -20; }
+}
